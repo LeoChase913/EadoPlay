@@ -255,6 +255,8 @@
     <string name="one_time_setup_on_this_car">在此车机上一次性设置</string>
     <string name="open">开放</string>
     <string name="open_after_the_car_starts">车机启动后打开</string>
+    <string name="start_car_hotspot_on_open">打开 EadoPlay 时开启车机热点</string>
+    <string name="start_car_hotspot_on_open_desc">打开应用时若原车热点未开启，尝试使用已保存的配置开启；仅适用于车机热点模式。</string>
     <string name="open_bluetooth">打开蓝牙</string>
     <string name="open_car_hotspot_settings">打开车机热点设置</string>
     <string name="open_car_settings">打开车机设置</string>

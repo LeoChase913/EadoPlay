@@ -52,7 +52,7 @@ ADB 位于 Google 官方的 Android SDK Platform-Tools 中。没有必要安装�
 
 ## 三、下载 EadoPlay APK
 
-从本项目的 [GitHub Releases](https://github.com/lzc1611272792-eng/EadoPlay/releases) 下载最新版 APK。
+从本项目的 [GitHub Releases](https://github.com/LeoChase913/EadoPlay/releases) 下载最新版 APK。
 
 本教程假设文件保存在：
 
@@ -326,6 +326,12 @@ package:/data/app/eadoplay.apk
 4. 最后再考虑重启车机，让 Package Manager 重新扫描。
 
 不要在未检查日志前反复覆盖或删除文件。
+
+### 安装 r29 后开启自动连接
+
+先完成一次正常的无线连接。在 **EadoPlay → 设置 → 连接 → 自动连接** 中开启“打开 EadoPlay 时连接”和“打开 EadoPlay 时开启车机热点”。后者默认关闭，仅用于车机热点模式，使用原车已保存的热点名称和密码。
+
+r29 已移除“车机启动后打开”设置。以后打开 EadoPlay 才会尝试开启热点并连接；如果原车固件不允许自动开启热点，请手动开启。无线使用不需要电脑持续连接，也不需要运行 `adb tcpip 5555`。详见 [r29 发布说明](RELEASE-NOTES-r29.md)。
 
 ## 十、升级已有 EadoPlay
 

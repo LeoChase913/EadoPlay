@@ -2,7 +2,9 @@
 
 EadoPlay 是面向 **2018 款长安逸动原厂 Android 4.4.2 车机**适配的 CarPlay 客户端，基于 [shihabal3amri/DiPlay](https://github.com/shihabal3amri/DiPlay)、[DiPlay-Legacy-Android](https://github.com/programmerguohuajing/DiPlay-Legacy-Android) 及其上游 [xcertplay](https://github.com/shilapi/xcertplay) 修改。
 
-当前实车测试版本：`0.2.7-4.4-eado-r28`。
+当前发布版本：**`0.2.7-4.4-eado-r29`**（打开应用后自动开启热点并连接）。
+
+[下载 r29 安装包](https://github.com/LeoChase913/EadoPlay/releases/download/v0.2.7-4.4-eado-r29/EadoPlay-r29.apk) · [r29 中文发布说明](docs/RELEASE-NOTES-r29.md)
 
 ## 当前状态
 
@@ -16,6 +18,17 @@ EadoPlay 是面向 **2018 款长安逸动原厂 Android 4.4.2 车机**适配的 
 - 连接页面会显示详细阶段与失败节点，便于实车排查。
 - 有线 CarPlay 已包含 USB Host 实现，但目标车机目前仍卡在 Android USB 授权阶段，尚未完成端到端验证。
 - 已知限制：iPhone 锁屏时，从 CarPlay 主动拨出的微信电话可能无声，点亮手机后恢复；这是当前版本唯一保留的实车通话限制。
+
+## 打开应用后自动连接（r29）
+
+先完成一次正常的无线连接，再进入 **设置 → 连接 → 自动连接**，开启：
+
+- **打开 EadoPlay 时连接**：使用上次的连接方式与选定的 iPhone。
+- **打开 EadoPlay 时开启车机热点**：仅在“车机热点”模式下，使用原车保存的配置尝试开启热点；新选项默认关闭。
+
+日常使用时打开 EadoPlay 即可触发上述流程。r29 已移除“车机启动后打开”，没有保留开机自启动接收器。若固件不允许应用控制热点，仍需在原车设置中手动开启。
+
+该流程已于 2026 年 11 月 7 日在目标车机验证。r29 不包含后续 r30–r32 的有线 USB 调试改动；无线自动热点不需要开启网络 ADB。完整步骤和限制见 [r29 发布说明](docs/RELEASE-NOTES-r29.md)。
 
 ## 下载、源码构建与认证材料
 

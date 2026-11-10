@@ -6,10 +6,14 @@ EadoPlay 是针对 **2018 款长安逸动原厂 Android 4.4.2 车机**维护的�
 
 本项目基于 DiPlay、DiPlay-Legacy-Android 及其上游 xcertplay 修改，不是 Apple、长安汽车、Carlinkit 或上游维护者的官方产品。
 
+当前公开发布版本为 **r29**，重点是打开应用后自动开启热点并连接。
+
 ## 当前版本重点
 
 - 适配 Android 4.4.2 和目标车机的旧版音视频、网络及后台运行环境；
 - 使用车机热点完成无线 CarPlay 连接；
+- 支持“打开 EadoPlay 时连接”和“打开 EadoPlay 时开启车机热点”，需要在设置中开启；
+- 已移除开机自启动设置及接收器，只在打开应用时触发上述操作；
 - 支持导航、音乐、触控和方向盘媒体按键；
 - 适配系统电话接听与挂断；
 - 处理原车蓝牙在无线交接后反向暂停音乐的问题；
@@ -48,6 +52,7 @@ EadoPlay 是针对 **2018 款长安逸动原厂 Android 4.4.2 车机**维护的�
 ## 相关文档
 
 - [ADB 安装 EadoPlay 完整教程](长安逸动2018车机ADB安装APK操作手册.md)
+- [r29 发布说明与自动连接设置](RELEASE-NOTES-r29.md)
 - [r28 发布说明](RELEASE-NOTES-r28.md)
 - [构建说明](BUILD.md)
 - [第三方声明](THIRD_PARTY_NOTICES.md)

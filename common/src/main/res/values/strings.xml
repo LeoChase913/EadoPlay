@@ -255,6 +255,8 @@
     <string name="one_time_setup_on_this_car">One-time setup on this car</string>
     <string name="open">Open</string>
     <string name="open_after_the_car_starts">Open after the car starts</string>
+    <string name="start_car_hotspot_on_open">Start car hotspot when EadoPlay opens</string>
+    <string name="start_car_hotspot_on_open_desc">If the car hotspot is off, turn on its saved configuration when you open EadoPlay. Requires built-in car hotspot mode.</string>
     <string name="open_bluetooth">Open Bluetooth</string>
     <string name="open_car_hotspot_settings">Open car hotspot settings</string>
     <string name="open_car_settings">Open car settings</string>

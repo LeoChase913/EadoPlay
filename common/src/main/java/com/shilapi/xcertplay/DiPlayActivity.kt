@@ -110,6 +110,7 @@ class DiPlayActivity : ComponentActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent); setIntent(intent)
         page = intent.getStringExtra("page") ?: "home"; render()
+        startCarHotspotOnOpen()
         handleWirelessRecovery()
     }
     override fun onSaveInstanceState(outState: Bundle) { outState.putString("page", page); outState.putBoolean("pending_car_hotspot", pendingCarHotspotSetup); super.onSaveInstanceState(outState) }
@@ -125,11 +126,35 @@ class DiPlayActivity : ComponentActivity() {
         if (!initialLaunch && (page == "home" || page == "settings" || page == "connection")) render()
         if (initialLaunch) {
             initialLaunch = false
-            if (setupError == null && !CarPlayBackgroundSession.hasSession() &&
-                DiPlayPreferences.autoConnect(this) && intent.getStringExtra("page") == null) {
+            val autoConnect = setupError == null && !CarPlayBackgroundSession.hasSession() &&
+                DiPlayPreferences.autoConnect(this) && intent.getStringExtra("page") == null
+            if (shouldStartCarHotspotOnOpen()) {
+                startCarHotspotOnOpen {
+                    if (autoConnect) connect(AirPlayPersistence.loadWirelessEnabled(this))
+                }
+            } else if (autoConnect) {
                 handler.post { connect(AirPlayPersistence.loadWirelessEnabled(this)) }
             }
         }
+    }
+
+    private fun shouldStartCarHotspotOnOpen(): Boolean =
+        AirPlayPersistence.loadStartCarHotspotOnOpen(this) &&
+            AirPlayPersistence.loadWirelessHotspotMode(this) == WirelessHotspotMode.MANUAL &&
+            !CarPlayBackgroundSession.hasSession()
+
+    private fun startCarHotspotOnOpen(after: () -> Unit = {}) {
+        if (!shouldStartCarHotspotOnOpen()) return
+        val appContext = applicationContext
+        Thread({
+            CarHotspotLaunchStarter.startIfNeeded(appContext)
+            runOnUiThread {
+                if (!isFinishing && !isDestroyed) {
+                    if (page == "home") render()
+                    after()
+                }
+            }
+        }, "eadoplay-hotspot-open").start()
     }
     override fun onPause() { handler.removeCallbacks(tick); super.onPause() }
 
@@ -444,7 +469,7 @@ class DiPlayActivity : ComponentActivity() {
 
         section(content, getString(R.string.automatic_connection), R.drawable.ic_dp_automation) { card ->
             toggle(card, getString(R.string.connect_when_diplay_opens), getString(R.string.use_your_last_connection_type_and_selected_iphone), DiPlayPreferences.autoConnect(this)) { DiPlayPreferences.saveAutoConnect(this, it) }
-            toggle(card, getString(R.string.open_after_the_car_starts), getString(R.string.availability_depends_on_your_head_unit_s_startup_settings), AirPlayPersistence.loadAutoStartOnBoot(this)) { AirPlayPersistence.saveAutoStartOnBoot(this, it) }
+            toggle(card, getString(R.string.start_car_hotspot_on_open), getString(R.string.start_car_hotspot_on_open_desc), AirPlayPersistence.loadStartCarHotspotOnOpen(this)) { AirPlayPersistence.saveStartCarHotspotOnOpen(this, it) }
             card.addView(button("${getString(R.string.choose_iphone_prefix)}${DiPlayPreferences.phoneName(this)}", false) { choosePhone() }, matchButton(12, 54))
         }
 
