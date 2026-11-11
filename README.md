@@ -48,6 +48,7 @@ Git 源码不包含配件证书、私钥、Android 发布签名或真实手机�
 
 目标车机的厂商固件会拒绝普通第三方 APK 安装，实车使用了工程 ADB 将 APK 写入 `/data/app` 的设备特定方式：
 
+- [纯小白完整教程：从准备双 USB-A 公对公数据线到交给 AI 安装](docs/长安逸动2018车机安装EadoPlay纯小白教程.md)（第一次安装建议先看）
 - [长安逸动 2018 车机 ADB 安装 APK 操作手册](docs/长安逸动2018车机ADB安装APK操作手册.md)
 - [EadoPlay 项目说明](docs/EadoPlay项目说明.md)
 
